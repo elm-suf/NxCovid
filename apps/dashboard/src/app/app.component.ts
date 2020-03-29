@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApiService } from 'libs/api/src/lib/services/api.service';
 
 @Component({
   selector: 'nx-covid-root',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  constructor(readonly service: ApiService) {
+    this.service.getAll();
+  }
+
   title = 'dashboard';
 }
