@@ -5,6 +5,7 @@ import { NbCardModule, NbSelectModule } from '@nebular/theme';
 import { ApiModule } from '@nx-covid/api';
 import { CountrySelectComponent } from './dashboard/components/country-select/country-select.component';
 import { DashboardContainerComponent } from './dashboard/containers/dashboard-container/dashboard-container.component';
+import { DashboardDetailComponent } from './dashboard/components/dashboard-detail/dashboard-detail.component';
 
 @NgModule({
   imports: [
@@ -14,7 +15,7 @@ import { DashboardContainerComponent } from './dashboard/containers/dashboard-co
     NbCardModule,
     NbSelectModule
   ],
-  declarations: [DashboardContainerComponent, CountrySelectComponent],
+  declarations: [DashboardContainerComponent, CountrySelectComponent, DashboardDetailComponent],
   exports: [DashboardContainerComponent]
 })
 export class UiModule {}
