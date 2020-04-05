@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Country, CountryNamesGQL } from '@nx-covid/api';
+import { Country } from '@nx-covid/api';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { DashboardSandbox } from '../../../dashboard.sandbox';
 
 @Component({
   selector: 'nx-covid-country-select',
@@ -11,11 +11,7 @@ import { map } from 'rxjs/operators';
 export class CountrySelectComponent implements OnInit {
   countryNamesResult: Observable<Country[]>;
 
-  constructor(readonly countryNames: CountryNamesGQL) {
-    this.countryNamesResult = this.countryNames
-      .watch()
-      .valueChanges.pipe(map(res => res.data.countries));
-  }
+  constructor(readonly sandbox: DashboardSandbox) {}
 
   onSelectedChange($event) {
     console.log($event);

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardSandbox } from '../../../dashboard.sandbox';
 
 @Component({
   selector: 'nx-covid-dashboard-container',
@@ -6,10 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard-container.component.scss']
 })
 export class DashboardContainerComponent implements OnInit {
+  constructor(readonly sandbox: DashboardSandbox) {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

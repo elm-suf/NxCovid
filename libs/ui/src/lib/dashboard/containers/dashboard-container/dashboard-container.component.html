@@ -2,7 +2,8 @@
   <nb-card-header>
     <nx-covid-country-select></nx-covid-country-select>
   </nb-card-header>
-  <nb-card-body>
-    <h2>Ciao</h2>
-  </nb-card-body>
+  <nb-card-body> </nb-card-body>
+  <nb-card-footer>
+    <h2>{{ sandbox.selectedCountries | async | json }}</h2>
+  </nb-card-footer>
 </nb-card>
