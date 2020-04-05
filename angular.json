@@ -158,6 +158,16 @@
               }
             ]
           }
+        },
+        "introspect": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              {
+                "command": "npx apollo-codegen introspect-schema https://covid19-graphql.now.sh/ --output libs/api/schema.json"
+              }
+            ]
+          }
         }
       },
       "schematics": {

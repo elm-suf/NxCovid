@@ -1,5 +1,5 @@
 overwrite: true
-schema: 'libs/api/schema.graphql'
+schema: 'libs/api/schema.json'
 generates:
   libs/api/src/lib/generated/generated.ts:
     documents: 'libs/api/src/lib/graphql/**/*.graphql'

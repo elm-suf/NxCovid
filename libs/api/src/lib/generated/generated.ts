@@ -20,6 +20,7 @@ export type Country = {
   mostRecent?: Maybe<Result>;
 };
 
+/** eq - equal to, gt - greater than, lt - less than */
 export type DateInput = {
   eq?: Maybe<Scalars['String']>;
   gt?: Maybe<Scalars['String']>;
@@ -59,6 +60,7 @@ export type QueryCountryArgs = {
 export type Result = {
    __typename?: 'Result';
   country?: Maybe<Country>;
+  /** format date with date-fns. Help - https://date-fns.org/v2.11.0/docs/format */
   date?: Maybe<Scalars['String']>;
   confirmed?: Maybe<Scalars['Int']>;
   deaths?: Maybe<Scalars['Int']>;
