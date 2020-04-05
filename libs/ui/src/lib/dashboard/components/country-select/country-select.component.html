@@ -1,10 +1,6 @@
-<div
-  *ngIf="sandbox.countryNames | async as countryNames"
-  fxLayout="row"
-  fxLayoutAlign="space-around center"
->
+<div *ngIf="countryNames" fxLayout="row" fxLayoutAlign="space-around center">
   <nb-select
-    (selectedChange)="sandbox.selectCountries($event)"
+    (selectedChange)="onSelectedChange($event)"
     multiple
     placeholder="Multiple Select"
     appearance="hero"

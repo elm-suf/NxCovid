@@ -1,6 +1,9 @@
 <nb-card>
   <nb-card-header>
-    <nx-covid-country-select></nx-covid-country-select>
+    <nx-covid-country-select
+      [countryNames]="sandbox.countryNames | async"
+      (selectCountries)="sandbox.selectCountries($event)"
+    ></nx-covid-country-select>
   </nb-card-header>
   <nb-card-body> </nb-card-body>
   <nb-card-footer>
