@@ -1,0 +1,14 @@
+<div div fxLayout="row" fxLayoutAlign="space-around center">
+  <nb-select
+    (selectedChange)="onSelectedChange($event)"
+    multiple
+    placeholder="Multiple Select"
+    appearance="hero"
+  >
+    <nb-option
+      *ngFor="let item of countryNamesResult | async"
+      [value]="item.name"
+      >{{ item.name }}</nb-option
+    >
+  </nb-select>
+</div>
