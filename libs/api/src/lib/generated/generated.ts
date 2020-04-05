@@ -73,7 +73,7 @@ export type ResultDateArgs = {
   format?: Maybe<Scalars['String']>;
 };
 
-export type CountryFragmentFragment = (
+export type CountryFragment = (
   { __typename?: 'Country' }
   & Pick<Country, 'name'>
   & { results?: Maybe<Array<Maybe<(
@@ -89,12 +89,12 @@ export type AllCountriesQuery = (
   { __typename?: 'Query' }
   & { countries?: Maybe<Array<Maybe<(
     { __typename?: 'Country' }
-    & CountryFragmentFragment
+    & CountryFragment
   )>>> }
 );
 
-export const CountryFragmentFragmentDoc = gql`
-    fragment countryFragment on Country {
+export const CountryFragmentDoc = gql`
+    fragment country on Country {
   name
   results {
     date
@@ -108,10 +108,10 @@ export const CountryFragmentFragmentDoc = gql`
 export const AllCountriesDocument = gql`
     query allCountries {
   countries {
-    ...countryFragment
+    ...country
   }
 }
-    ${CountryFragmentFragmentDoc}`;
+    ${CountryFragmentDoc}`;
 
   @Injectable({
     providedIn: 'root'

@@ -1,4 +1,4 @@
-fragment countryFragment on Country {
+fragment country on Country {
   name
   results {
     date
@@ -11,6 +11,6 @@ fragment countryFragment on Country {
 
 query allCountries {
   countries {
-    ...countryFragment
+    ...country
   }
 }

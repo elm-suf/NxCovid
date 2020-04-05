@@ -1,5 +1,6 @@
 overwrite: true
 schema: 'libs/api/schema.json'
+target: 'ts-modern'
 generates:
   libs/api/src/lib/generated/generated.ts:
     documents: 'libs/api/src/lib/graphql/**/*.graphql'

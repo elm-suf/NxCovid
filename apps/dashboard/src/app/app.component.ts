@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { AllCountriesGQL } from '@nx-covid/api';
-import { pluck } from 'rxjs/operators';
+import { AllCountriesGQL, CountryFragment } from '@nx-covid/api';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'nx-covid-root',
@@ -8,12 +9,12 @@ import { pluck } from 'rxjs/operators';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  allCountriesResult: any;
+  allCountriesResult: Observable<CountryFragment[]>;
 
   constructor(readonly allCountries: AllCountriesGQL) {
     this.allCountriesResult = this.allCountries
       .watch()
-      .valueChanges.pipe(pluck('data'));
+      .valueChanges.pipe(map(res => res.data.countries));
   }
   title = 'dashboard';
 }
