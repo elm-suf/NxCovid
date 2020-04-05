@@ -1,0 +1,9 @@
+overwrite: true
+schema: 'libs/api/schema.graphql'
+generates:
+  libs/api/src/lib/generated/generated.ts:
+    documents: 'libs/api/src/lib/graphql/**/*.graphql'
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-apollo-angular'

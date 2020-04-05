@@ -1,0 +1,16 @@
+fragment countryFragment on Country {
+  name
+  results {
+    date
+    confirmed
+    deaths
+    recovered
+    growthRate
+  }
+}
+
+query allCountries {
+  countries {
+    ...countryFragment
+  }
+}

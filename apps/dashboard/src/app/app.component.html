@@ -5,6 +5,10 @@
 
   <nb-layout-column>
     <router-outlet></router-outlet>
+    <details>
+      <summary> allCountries.watch().currentResult() | json </summary>
+      <pre>{{ allCountriesResult | async | json }}</pre>
+    </details>
   </nb-layout-column>
 
   <nb-layout-footer fixed>

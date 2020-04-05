@@ -148,6 +148,16 @@
             "passWithNoTests": true,
             "setupFile": "libs/api/src/test-setup.ts"
           }
+        },
+        "generate-graphql": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              {
+                "command": "npx graphql-codegen --config libs/api/codegen.yml"
+              }
+            ]
+          }
         }
       },
       "schematics": {

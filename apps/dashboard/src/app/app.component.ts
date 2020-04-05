@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ApiService } from 'libs/api/src/lib/services/api.service';
+import { AllCountriesGQL } from '@nx-covid/api';
+import { pluck } from 'rxjs/operators';
 
 @Component({
   selector: 'nx-covid-root',
@@ -7,9 +8,12 @@ import { ApiService } from 'libs/api/src/lib/services/api.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(readonly service: ApiService) {
-    this.service.getAll();
-  }
+  allCountriesResult: any;
 
+  constructor(readonly allCountries: AllCountriesGQL) {
+    this.allCountriesResult = this.allCountries
+      .watch()
+      .valueChanges.pipe(pluck('data'));
+  }
   title = 'dashboard';
 }
