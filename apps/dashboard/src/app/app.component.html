@@ -4,11 +4,32 @@
   </nb-layout-header>
 
   <nb-layout-column>
-    <router-outlet></router-outlet>
+    <!-- <router-outlet></router-outlet>
     <details>
-      <summary> allCountries.watch().currentResult() | json </summary>
+      <summary>allCountriesResult</summary>
       <pre>{{ allCountriesResult | async | json }}</pre>
     </details>
+    <details>
+      <summary>countryNamesResult</summary>
+      <pre>{{ countryNamesResult | async | json }}</pre>
+    </details> -->
+
+    <nb-card size="small">
+      <nb-card-body>
+        <nb-select
+          (selectedChange)="onSelectedChange($event)"
+          multiple
+          placeholder="Multiple Select"
+          appearance="hero"
+        >
+          <nb-option
+            *ngFor="let item of countryNamesResult | async"
+            [value]="item.name"
+            >{{ item.name }}</nb-option
+          >
+        </nb-select>
+      </nb-card-body>
+    </nb-card>
   </nb-layout-column>
 
   <nb-layout-footer fixed>

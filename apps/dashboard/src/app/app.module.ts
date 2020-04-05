@@ -3,7 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { NbLayoutModule, NbThemeModule } from '@nebular/theme';
+import {
+  NbCardModule,
+  NbLayoutModule,
+  NbSelectModule,
+  NbThemeModule
+} from '@nebular/theme';
 import { ApiModule } from '@nx-covid/api';
 import { AppComponent } from './app.component';
 
@@ -16,6 +21,8 @@ import { AppComponent } from './app.component';
     NbThemeModule.forRoot({ name: 'dark' }),
     NbLayoutModule,
     NbEvaIconsModule,
+    NbSelectModule,
+    NbCardModule,
     ApiModule
   ],
   providers: [],

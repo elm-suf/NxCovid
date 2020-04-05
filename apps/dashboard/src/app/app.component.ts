@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AllCountriesGQL, CountryFragment } from '@nx-covid/api';
+import { Country, CountryNamesGQL } from '@nx-covid/api';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -9,12 +9,16 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  allCountriesResult: Observable<CountryFragment[]>;
+  countryNamesResult: Observable<Country[]>;
+  title = 'dashboard';
 
-  constructor(readonly allCountries: AllCountriesGQL) {
-    this.allCountriesResult = this.allCountries
+  constructor(readonly countryNames: CountryNamesGQL) {
+    this.countryNamesResult = this.countryNames
       .watch()
       .valueChanges.pipe(map(res => res.data.countries));
   }
-  title = 'dashboard';
+
+  onSelectedChange($event) {
+    console.log($event);
+  }
 }

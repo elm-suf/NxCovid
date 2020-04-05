@@ -1,7 +1,7 @@
 # NxCovid
 
 - This project was generated using [Nx](https://nx.dev).
-- The data used for this application comes from https://covid19-graphql.now.sh/
+- The data used for this application comes from this[ GraphQl endpoint](https://covid19-graphql.now.sh/) [source](https://github.com/rlindskog/covid19-graphql)
 - this application uses [Apollo Client](https://www.apollographql.com/docs/angular/) to interact with the api above
 - this application uses [Nebular](https://akveo.github.io/nebular/) UI libray
 

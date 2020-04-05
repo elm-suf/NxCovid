@@ -93,6 +93,17 @@ export type AllCountriesQuery = (
   )>>> }
 );
 
+export type CountryNamesQueryVariables = {};
+
+
+export type CountryNamesQuery = (
+  { __typename?: 'Query' }
+  & { countries?: Maybe<Array<Maybe<(
+    { __typename?: 'Country' }
+    & Pick<Country, 'name'>
+  )>>> }
+);
+
 export const CountryFragmentDoc = gql`
     fragment country on Country {
   name
@@ -118,5 +129,20 @@ export const AllCountriesDocument = gql`
   })
   export class AllCountriesGQL extends Apollo.Query<AllCountriesQuery, AllCountriesQueryVariables> {
     document = AllCountriesDocument;
+    
+  }
+export const CountryNamesDocument = gql`
+    query countryNames {
+  countries {
+    name
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CountryNamesGQL extends Apollo.Query<CountryNamesQuery, CountryNamesQueryVariables> {
+    document = CountryNamesDocument;
     
   }
