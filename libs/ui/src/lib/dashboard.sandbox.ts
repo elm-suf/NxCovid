@@ -1,7 +1,11 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { CountryNamesGQL } from '@nx-covid/api';
+import {
+  CountriesResultsGQL,
+  CountryNamesGQL,
+  ResultsFragment
+} from '@nx-covid/api';
 import { Observable } from 'rxjs';
-import { map, pluck, tap } from 'rxjs/operators';
+import { filter, map, pluck, switchMap, tap } from 'rxjs/operators';
 import { DashboardStore } from './dashboard.store';
 import { fromCountryToName } from './helpers/mapppers';
 
@@ -9,6 +13,7 @@ import { fromCountryToName } from './helpers/mapppers';
 export class DashboardSandbox implements OnDestroy {
   constructor(
     readonly countryNamesGQL: CountryNamesGQL,
+    readonly resultsGQL: CountriesResultsGQL,
     readonly store: DashboardStore
   ) {
     this.countryNamesGQL
@@ -19,18 +24,34 @@ export class DashboardSandbox implements OnDestroy {
         tap(console.log)
       )
       .subscribe(data => this.store.countryNames$.next(data));
+
+    this.store.selectedCountries$
+      .pipe(
+        filter(it => it !== null && it.length !== 0),
+        switchMap(
+          (selectedCountries: string[]) =>
+            this.resultsGQL.watch({ selectedCountries }).valueChanges
+        ),
+        map(res => res.data.countries),
+        tap(res => console.log('new data', res))
+      )
+      .subscribe(data => this.store.results$.next(data));
   }
 
-  get countryNames(): Observable<string[]> {
+  get countryNames$(): Observable<string[]> {
     return this.store.countryNames$.asObservable();
   }
 
   get selectedCountries(): Observable<string[]> {
-    return this.store.selectedCountries.asObservable();
+    return this.store.selectedCountries$.asObservable();
+  }
+
+  get results$(): Observable<ResultsFragment[]> {
+    return this.store.results$.asObservable();
   }
 
   selectCountries(countryNames: string[]) {
-    this.store.selectedCountries.next(countryNames);
+    this.store.selectedCountries$.next(countryNames);
   }
 
   ngOnDestroy(): void {

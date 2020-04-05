@@ -73,26 +73,6 @@ export type ResultDateArgs = {
   format?: Maybe<Scalars['String']>;
 };
 
-export type CountryFragment = (
-  { __typename?: 'Country' }
-  & Pick<Country, 'name'>
-  & { results?: Maybe<Array<Maybe<(
-    { __typename?: 'Result' }
-    & Pick<Result, 'date' | 'confirmed' | 'deaths' | 'recovered' | 'growthRate'>
-  )>>> }
-);
-
-export type AllCountriesQueryVariables = {};
-
-
-export type AllCountriesQuery = (
-  { __typename?: 'Query' }
-  & { countries?: Maybe<Array<Maybe<(
-    { __typename?: 'Country' }
-    & CountryFragment
-  )>>> }
-);
-
 export type CountryNamesQueryVariables = {};
 
 
@@ -104,8 +84,30 @@ export type CountryNamesQuery = (
   )>>> }
 );
 
-export const CountryFragmentDoc = gql`
-    fragment country on Country {
+export type CountriesResultsQueryVariables = {
+  selectedCountries?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+
+export type CountriesResultsQuery = (
+  { __typename?: 'Query' }
+  & { countries?: Maybe<Array<Maybe<(
+    { __typename?: 'Country' }
+    & ResultsFragment
+  )>>> }
+);
+
+export type ResultsFragment = (
+  { __typename?: 'Country' }
+  & Pick<Country, 'name'>
+  & { results?: Maybe<Array<Maybe<(
+    { __typename?: 'Result' }
+    & Pick<Result, 'date' | 'confirmed' | 'deaths' | 'recovered' | 'growthRate'>
+  )>>> }
+);
+
+export const ResultsFragmentDoc = gql`
+    fragment results on Country {
   name
   results {
     date
@@ -116,21 +118,6 @@ export const CountryFragmentDoc = gql`
   }
 }
     `;
-export const AllCountriesDocument = gql`
-    query allCountries {
-  countries {
-    ...country
-  }
-}
-    ${CountryFragmentDoc}`;
-
-  @Injectable({
-    providedIn: 'root'
-  })
-  export class AllCountriesGQL extends Apollo.Query<AllCountriesQuery, AllCountriesQueryVariables> {
-    document = AllCountriesDocument;
-    
-  }
 export const CountryNamesDocument = gql`
     query countryNames {
   countries {
@@ -144,5 +131,20 @@ export const CountryNamesDocument = gql`
   })
   export class CountryNamesGQL extends Apollo.Query<CountryNamesQuery, CountryNamesQueryVariables> {
     document = CountryNamesDocument;
+    
+  }
+export const CountriesResultsDocument = gql`
+    query countriesResults($selectedCountries: [String]) {
+  countries(names: $selectedCountries) {
+    ...results
+  }
+}
+    ${ResultsFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CountriesResultsGQL extends Apollo.Query<CountriesResultsQuery, CountriesResultsQueryVariables> {
+    document = CountriesResultsDocument;
     
   }

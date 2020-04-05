@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ResultsFragment } from '@nx-covid/api';
 
 @Component({
   selector: 'nx-covid-dashboard-detail',
@@ -6,10 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard-detail.component.scss']
 })
 export class DashboardDetailComponent implements OnInit {
+  @Input() results: ResultsFragment[];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

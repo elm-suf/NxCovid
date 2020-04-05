@@ -1,0 +1,16 @@
+query countriesResults($selectedCountries: [String]) {
+  countries(names: $selectedCountries) {
+    ...results
+  }
+}
+
+fragment results on Country {
+  name
+  results {
+    date
+    confirmed
+    deaths
+    recovered
+    growthRate
+  }
+}
