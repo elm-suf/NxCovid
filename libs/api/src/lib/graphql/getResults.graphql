@@ -6,11 +6,8 @@ query countriesResults($selectedCountries: [String]) {
 
 fragment results on Country {
   name
-  results {
-    date
-    confirmed
-    deaths
-    recovered
-    growthRate
+  series: results {
+    name: date
+    value: confirmed
   }
 }

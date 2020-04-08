@@ -100,21 +100,18 @@ export type CountriesResultsQuery = (
 export type ResultsFragment = (
   { __typename?: 'Country' }
   & Pick<Country, 'name'>
-  & { results?: Maybe<Array<Maybe<(
+  & { series?: Maybe<Array<Maybe<(
     { __typename?: 'Result' }
-    & Pick<Result, 'date' | 'confirmed' | 'deaths' | 'recovered' | 'growthRate'>
+    & { name: Result['date'], value: Result['confirmed'] }
   )>>> }
 );
 
 export const ResultsFragmentDoc = gql`
     fragment results on Country {
   name
-  results {
-    date
-    confirmed
-    deaths
-    recovered
-    growthRate
+  series: results {
+    name: date
+    value: confirmed
   }
 }
     `;

@@ -41,6 +41,7 @@
     "@angular/router": "9.0.0",
     "@nebular/eva-icons": "5.0.0",
     "@nebular/theme": "^5.0.0",
+    "@swimlane/ngx-charts": "^13.0.2",
     "apollo-angular": "^1.8.0",
     "apollo-angular-link-http": "^1.9.0",
     "apollo-cache-inmemory": "^1.6.0",
