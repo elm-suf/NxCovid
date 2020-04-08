@@ -8,6 +8,6 @@
 #    that is where we will look for package.json/.nvmrc/etc not repo root!
 
 [build]
-  base    = "nx-covid"
-  publish = "nx-covid/dist/apps/dashboard"
+  base    = "NxCovid"
+  publish = "NxCovid/dist/apps/dashboard"
   command = "npm run build-netlify"
