@@ -1,8 +1,9 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { ApiService, ResultsFragment } from '@nx-covid/api';
 import { Observable } from 'rxjs';
-import { filter, switchMap } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { DashboardStore } from './dashboard.store';
+import { mapToPieData, NgxData } from './helpers/mappers';
 
 @Injectable({ providedIn: 'root' })
 export class DashboardSandbox implements OnDestroy {
@@ -19,6 +20,13 @@ export class DashboardSandbox implements OnDestroy {
         )
       )
       .subscribe(data => this.store.results$.next(data));
+  }
+
+  get pieGridData$(): Observable<NgxData[]> {
+    return this.store.results$.pipe(
+      filter(data => data != null),
+      map(mapToPieData)
+    );
   }
 
   get countryNames$(): Observable<string[]> {

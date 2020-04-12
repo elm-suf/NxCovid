@@ -6,11 +6,15 @@
     {{ results | json }}
   </pre>
 </details> -->
-<div style="width: 100%; height: 60vh;">
-  <ngx-charts-polar-chart
-    [scheme]="colorScheme"
-    [legend]="legend"
+<div id="advanced-pie-chart">
+  <ngx-charts-advanced-pie-chart
+    [view]="view"
     [results]="results"
+    (select)="onSelect($event)"
+    (activate)="onActivate($event)"
+    (deactivate)="onDeactivate($event)"
   >
-  </ngx-charts-polar-chart>
+  </ngx-charts-advanced-pie-chart>
 </div>
+
+
