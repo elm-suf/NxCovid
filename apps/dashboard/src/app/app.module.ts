@@ -12,7 +12,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     RouterModule.forRoot([], { initialNavigation: 'enabled' }),
     BrowserAnimationsModule,
-    NbThemeModule.forRoot({ name: 'dark' }),
+    NbThemeModule.forRoot({ name: 'default' }),
     NbLayoutModule,
     UiModule,
     FlexLayoutModule

@@ -1,12 +1,38 @@
-<div *ngIf="countryNames" fxLayout="row" fxLayoutAlign="space-around center">
-  <nb-select
-    (selectedChange)="onSelectedChange($event)"
-    multiple
-    placeholder="Multiple Select"
-    appearance="hero"
-  >
-    <nb-option *ngFor="let item of countryNames" [value]="item">
-      {{ item }}
+<div
+  fxLayout="row"
+  fxLayout.lt-md="column"
+  fxLayoutGap="1em"
+  fxLayoutAlign="space-between center"
+>
+  <nb-form-field>
+    <nb-icon nbPrefix icon="globe-2-outline" pack="eva"></nb-icon>
+    <nb-icon
+      *ngIf="value"
+      nbSuffix
+      icon="arrow-back-outline"
+      pack="eva"
+      (click)="value = ''"
+    ></nb-icon>
+    <input
+      [(ngModel)]="value"
+      (ngModelChange)="onModelChange($event)"
+      nbInput
+      type="text"
+      placeholder="Select countries"
+      [nbAutocomplete]="autoControl"
+    />
+  </nb-form-field>
+
+  <nb-autocomplete #autoControl (selectedChange)="onSelectedChange($event)">
+    <nb-option *ngFor="let option of filteredOptions$ | async" [value]="option">
+      {{ option }}
     </nb-option>
-  </nb-select>
+  </nb-autocomplete>
+
+  <div fxLayout fxLayoutAlign="end center" fxLayoutGap="1em">
+    <div class="chip" *ngFor="let item of slectedCountries">
+      {{ item }}
+      <span class="closebtn" (click)="onDeselectedChange(item)">&times;</span>
+    </div>
+  </div>
 </div>

@@ -1,6 +1,20 @@
-<details>
-  <summary>Results</summary>
+<!-- <details>
+  <summary
+    >https://swimlane.github.io/ngx-charts/#/ngx-charts/line-chart</summary
+  >
   <pre>
     {{ results | json }}
   </pre>
-</details>
+</details> -->
+<div id="advanced-pie-chart">
+  <ngx-charts-advanced-pie-chart
+    [view]="view"
+    [results]="results"
+    (select)="onSelect($event)"
+    (activate)="onActivate($event)"
+    (deactivate)="onDeactivate($event)"
+  >
+  </ngx-charts-advanced-pie-chart>
+</div>
+
+

@@ -1,53 +1,56 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import {
-  CountriesResultsGQL,
-  CountryNamesGQL,
-  ResultsFragment
-} from '@nx-covid/api';
+import { ApiService, ResultsFragment } from '@nx-covid/api';
 import { Observable } from 'rxjs';
-import { filter, map, pluck, switchMap, tap } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { DashboardStore } from './dashboard.store';
-import { fromCountryToName } from './helpers/mapppers';
+import { mapToPieData, NgxData } from './helpers/mappers';
 
 @Injectable({ providedIn: 'root' })
 export class DashboardSandbox implements OnDestroy {
-  constructor(
-    readonly countryNamesGQL: CountryNamesGQL,
-    readonly resultsGQL: CountriesResultsGQL,
-    readonly store: DashboardStore
-  ) {
-    this.countryNamesGQL
-      .watch()
-      .valueChanges.pipe(
-        pluck('data', 'countries'),
-        map(fromCountryToName),
-        tap(console.log)
-      )
+  constructor(readonly api: ApiService, readonly store: DashboardStore) {
+    this.api
+      .getCountryNames()
       .subscribe(data => this.store.countryNames$.next(data));
 
     this.store.selectedCountries$
       .pipe(
         filter(it => it !== null && it.length !== 0),
-        switchMap(
-          (selectedCountries: string[]) =>
-            this.resultsGQL.watch({ selectedCountries }).valueChanges
-        ),
-        map(res => res.data.countries),
-        tap(res => console.log('new data', res))
+        switchMap((selectedCountries: string[]) =>
+          this.api.getResults(selectedCountries)
+        )
       )
       .subscribe(data => this.store.results$.next(data));
+  }
+
+  get pieGridData$(): Observable<NgxData[]> {
+    return this.store.results$.pipe(
+      filter(data => data != null),
+      map(mapToPieData)
+    );
   }
 
   get countryNames$(): Observable<string[]> {
     return this.store.countryNames$.asObservable();
   }
 
-  get selectedCountries(): Observable<string[]> {
+  get selectedCountries$(): Observable<string[]> {
     return this.store.selectedCountries$.asObservable();
   }
 
   get results$(): Observable<ResultsFragment[]> {
     return this.store.results$.asObservable();
+  }
+
+  private selectedCountries = new Array<string>();
+  selectCountry(country: string) {
+    this.selectedCountries.push(country);
+    this.selectCountries(this.selectedCountries);
+  }
+
+  deSelectCountry(country: string) {
+    const index = this.selectedCountries.indexOf(country);
+    this.selectedCountries.splice(index, 1);
+    this.selectCountries(this.selectedCountries);
   }
 
   selectCountries(countryNames: string[]) {

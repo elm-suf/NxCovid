@@ -2,15 +2,42 @@
   <nb-card-header>
     <nx-covid-country-select
       [countryNames]="sandbox.countryNames$ | async"
-      (selectCountries)="sandbox.selectCountries($event)"
+      [slectedCountries]="sandbox.selectedCountries$ | async"
+      (selectCountries)="sandbox.selectCountry($event)"
+      (deSelectCountry)="sandbox.deSelectCountry($event)"
     ></nx-covid-country-select>
   </nb-card-header>
   <nb-card-body>
     <nx-covid-dashboard-detail
-      [results]="sandbox.results$ | async"
+      *ngIf="sandbox.pieGridData$ | async as resultsData; else tmp"
+      [results]="resultsData"
     ></nx-covid-dashboard-detail>
+    <ng-template #tmp> <h2>Select some country</h2> </ng-template>
   </nb-card-body>
-  <nb-card-footer>
-    <h2>{{ sandbox.selectedCountries | async | json }}</h2>
-  </nb-card-footer>
+  <!-- <nb-card-footer>
+    <h2>{{ sandbox.selectedCountries$ | async | json }}</h2>
+  </nb-card-footer> -->
+</nb-card>
+
+<nb-card>
+  <nb-card-header>
+    ngx-charts-bar-horizontal
+  </nb-card-header>
+  <nb-card-body *ngIf="sandbox.pieGridData$ | async as resultsData">
+    <ngx-charts-bar-horizontal
+      [view]="view"
+      [scheme]="colorScheme"
+      [results]="resultsData"
+      [gradient]="gradient"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [legend]="showLegend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      (select)="onSelect($event)"
+    >
+    </ngx-charts-bar-horizontal>
+  </nb-card-body>
 </nb-card>
