@@ -2,17 +2,21 @@
   <nb-card-header>
     <nx-covid-country-select
       [countryNames]="sandbox.countryNames$ | async"
-      (selectCountries)="sandbox.selectCountries($event)"
+      [slectedCountries]="sandbox.selectedCountries$ | async"
+      (selectCountries)="sandbox.selectCountry($event)"
+      (deSelectCountry)="sandbox.deSelectCountry($event)"
     ></nx-covid-country-select>
   </nb-card-header>
   <nb-card-body>
     <nx-covid-dashboard-detail
-      [results]="sandbox.pieGridData$ | async"
+      *ngIf="sandbox.pieGridData$ | async as resultsData; else tmp"
+      [results]="resultsData"
     ></nx-covid-dashboard-detail>
+    <ng-template #tmp> <h2>Select some country</h2> </ng-template>
   </nb-card-body>
-  <nb-card-footer>
-    <h2>{{ sandbox.selectedCountries | async | json }}</h2>
-  </nb-card-footer>
+  <!-- <nb-card-footer>
+    <h2>{{ sandbox.selectedCountries$ | async | json }}</h2>
+  </nb-card-footer> -->
 </nb-card>
 
 <nb-card>

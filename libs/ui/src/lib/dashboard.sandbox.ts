@@ -33,12 +33,24 @@ export class DashboardSandbox implements OnDestroy {
     return this.store.countryNames$.asObservable();
   }
 
-  get selectedCountries(): Observable<string[]> {
+  get selectedCountries$(): Observable<string[]> {
     return this.store.selectedCountries$.asObservable();
   }
 
   get results$(): Observable<ResultsFragment[]> {
     return this.store.results$.asObservable();
+  }
+
+  private selectedCountries = new Array<string>();
+  selectCountry(country: string) {
+    this.selectedCountries.push(country);
+    this.selectCountries(this.selectedCountries);
+  }
+
+  deSelectCountry(country: string) {
+    const index = this.selectedCountries.indexOf(country);
+    this.selectedCountries.splice(index, 1);
+    this.selectCountries(this.selectedCountries);
   }
 
   selectCountries(countryNames: string[]) {
