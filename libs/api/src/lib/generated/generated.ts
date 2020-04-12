@@ -103,7 +103,10 @@ export type ResultsFragment = (
   & { series?: Maybe<Array<Maybe<(
     { __typename?: 'Result' }
     & { name: Result['date'], value: Result['confirmed'] }
-  )>>> }
+  )>>>, mostRecent?: Maybe<(
+    { __typename?: 'Result' }
+    & Pick<Result, 'date' | 'confirmed' | 'deaths' | 'recovered' | 'growthRate'>
+  )> }
 );
 
 export const ResultsFragmentDoc = gql`
@@ -112,6 +115,13 @@ export const ResultsFragmentDoc = gql`
   series: results {
     name: date
     value: confirmed
+  }
+  mostRecent {
+    date
+    confirmed
+    deaths
+    recovered
+    growthRate
   }
 }
     `;

@@ -10,4 +10,11 @@ fragment results on Country {
     name: date
     value: confirmed
   }
+  mostRecent {
+    date
+    confirmed
+    deaths
+    recovered
+    growthRate
+  }
 }
