@@ -1,43 +1,39 @@
-<nb-card>
-  <nb-card-header>
-    <nx-covid-country-select
-      [countryNames]="sandbox.countryNames$ | async"
-      [slectedCountries]="sandbox.selectedCountries$ | async"
-      (selectCountries)="sandbox.selectCountry($event)"
-      (deSelectCountry)="sandbox.deSelectCountry($event)"
-    ></nx-covid-country-select>
-  </nb-card-header>
-  <nb-card-body>
-    <nx-covid-dashboard-detail
-      *ngIf="sandbox.pieGridData$ | async as resultsData; else tmp"
-      [results]="resultsData"
-    ></nx-covid-dashboard-detail>
-    <ng-template #tmp> <h2>Select some country</h2> </ng-template>
-  </nb-card-body>
-  <!-- <nb-card-footer>
-    <h2>{{ sandbox.selectedCountries$ | async | json }}</h2>
-  </nb-card-footer> -->
-</nb-card>
+<main fxFlexFill fxLayout="row">
+  <div fxFlex>
+    <nx-covid-map></nx-covid-map>
+  </div>
+  <nb-layout class="_col-no-overflow" fxFlex="42">
+    <nb-layout-header>
+      <nx-covid-country-select
+        [countryNames]="sandbox.countryNames$ | async"
+        [slectedCountries]="sandbox.selectedCountries$ | async"
+        (selectCountries)="sandbox.selectCountry($event)"
+        (deSelectCountry)="sandbox.deSelectCountry($event)"
+      ></nx-covid-country-select>
+    </nb-layout-header>
+    <nb-layout-column style="padding: 1em;">
+      <nx-covid-dashboard-detail
+        *ngIf="sandbox.pieGridData$ | async as resultsData; else tmp"
+        [results]="resultsData"
+      ></nx-covid-dashboard-detail>
+      <ng-template #tmp> <h2>Select some country</h2> </ng-template>
 
-<nb-card>
-  <nb-card-header>
-    ngx-charts-bar-horizontal
-  </nb-card-header>
-  <nb-card-body *ngIf="sandbox.pieGridData$ | async as resultsData">
-    <ngx-charts-bar-horizontal
-      [view]="view"
-      [scheme]="colorScheme"
-      [results]="resultsData"
-      [gradient]="gradient"
-      [xAxis]="showXAxis"
-      [yAxis]="showYAxis"
-      [legend]="showLegend"
-      [showXAxisLabel]="showXAxisLabel"
-      [showYAxisLabel]="showYAxisLabel"
-      [xAxisLabel]="xAxisLabel"
-      [yAxisLabel]="yAxisLabel"
-      (select)="onSelect($event)"
-    >
-    </ngx-charts-bar-horizontal>
-  </nb-card-body>
-</nb-card>
+      <ngx-charts-bar-horizontal
+        *ngIf="sandbox.pieGridData$ | async as resultsData"
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="resultsData"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        (select)="onSelect($event)"
+      >
+      </ngx-charts-bar-horizontal>
+    </nb-layout-column>
+  </nb-layout>
+</main>

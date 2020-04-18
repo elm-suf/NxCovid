@@ -29,8 +29,13 @@
     </nb-option>
   </nb-autocomplete>
 
-  <div fxLayout fxLayoutAlign="end center" fxLayoutGap="1em">
-    <div class="chip" *ngFor="let item of slectedCountries">
+  <div fxLayout fxLayoutAlign="start center" fxLayoutGap="1em">
+    <div
+      class="chip"
+      *ngFor="let item of slectedCountries"
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+    >
       {{ item }}
       <span class="closebtn" (click)="onDeselectedChange(item)">&times;</span>
     </div>

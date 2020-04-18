@@ -7,7 +7,7 @@ import { DashboardSandbox } from '../../../dashboard.sandbox';
   styleUrls: ['./dashboard-container.component.scss']
 })
 export class DashboardContainerComponent implements OnInit {
-  view: any[] = [700, 400];
+  view: any[] = [360, 400];
 
   // options
   showXAxis = true;
@@ -28,6 +28,8 @@ export class DashboardContainerComponent implements OnInit {
   onSelect(event) {
     console.log(event);
   }
-
+  onGeolocate($event) {
+    console.log($event);
+  }
   ngOnInit(): void {}
 }
