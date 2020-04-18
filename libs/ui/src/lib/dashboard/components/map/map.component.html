@@ -1,0 +1,29 @@
+<mgl-map
+  [style]="'mapbox://styles/mapbox/light-v9'"
+  [zoom]="[1]"
+  [center]="[-74.5, 40]"
+>
+  <mgl-layer
+    id="states-layer"
+    type="fill"
+    [source]="{
+      type: 'geojson',
+      data:
+        'https://raw.githubusercontent.com/bsrweb/geo-json-countries-mapbox/master/countries/all-countries.json'
+    }"
+    [paint]="{
+      'fill-color': 'rgba(200, 100, 240, 0.4)',
+      'fill-outline-color': 'rgba(200, 100, 240, 1)'
+    }"
+    (mouseEnter)="cursorStyle = 'pointer'"
+    (mouseLeave)="cursorStyle = ''"
+    (click)="onClick($event)"
+  ></mgl-layer>
+  <mgl-popup *ngIf="selectedLngLat" [lngLat]="selectedLngLat">
+    <span [innerHTML]="selectedElement?.name"></span>
+  </mgl-popup>
+
+  <mgl-control mglGeocoder position="top-left"></mgl-control>
+  <mgl-control mglFullscreen></mgl-control>
+  <mgl-control mglNavigation></mgl-control>
+</mgl-map>

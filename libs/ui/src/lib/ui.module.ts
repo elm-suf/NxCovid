@@ -9,12 +9,16 @@ import {
   NbFormFieldModule,
   NbIconModule,
   NbInputModule,
+  NbLayoutModule,
   NbSelectModule
 } from '@nebular/theme';
 import { ApiModule } from '@nx-covid/api';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
+import { environment } from '../../../../apps/dashboard/src/environments/environment';
 import { CountrySelectComponent } from './dashboard/components/country-select/country-select.component';
 import { DashboardDetailComponent } from './dashboard/components/dashboard-detail/dashboard-detail.component';
+import { MapComponent } from './dashboard/components/map/map.component';
 import { DashboardContainerComponent } from './dashboard/containers/dashboard-container/dashboard-container.component';
 @NgModule({
   imports: [
@@ -28,14 +32,19 @@ import { DashboardContainerComponent } from './dashboard/containers/dashboard-co
     NbIconModule,
     NbEvaIconsModule,
     NbFormFieldModule,
+    NbLayoutModule,
     ReactiveFormsModule,
     FormsModule,
-    NgxChartsModule
+    NgxChartsModule,
+    NgxMapboxGLModule.withConfig({
+      accessToken: environment.mapBoxToken
+    })
   ],
   declarations: [
     DashboardContainerComponent,
     CountrySelectComponent,
-    DashboardDetailComponent
+    DashboardDetailComponent,
+    MapComponent
   ],
   exports: [DashboardContainerComponent]
 })

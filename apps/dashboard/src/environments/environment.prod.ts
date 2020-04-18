@@ -1,3 +1,6 @@
+import { Environment } from './environment-variables';
+
 export const environment = {
-  production: true
+  production: true,
+  mapBoxToken: Environment.MAPBOX_TOKEN
 };
