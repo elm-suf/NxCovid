@@ -18,8 +18,8 @@ import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { environment } from '../../../../apps/dashboard/src/environments/environment';
 import { CountrySelectComponent } from './dashboard/components/country-select/country-select.component';
 import { DashboardDetailComponent } from './dashboard/components/dashboard-detail/dashboard-detail.component';
-import { DashboardContainerComponent } from './dashboard/containers/dashboard-container/dashboard-container.component';
 import { MapComponent } from './dashboard/components/map/map.component';
+import { DashboardContainerComponent } from './dashboard/containers/dashboard-container/dashboard-container.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -37,7 +37,7 @@ import { MapComponent } from './dashboard/components/map/map.component';
     FormsModule,
     NgxChartsModule,
     NgxMapboxGLModule.withConfig({
-      accessToken: environment.MAP_BOX_TOKEN
+      accessToken: environment.mapBoxToken
     })
   ],
   declarations: [
