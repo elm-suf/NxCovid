@@ -51,6 +51,8 @@
     "eva-icons": "^1.1.2",
     "graphql": "^14.5.0",
     "graphql-tag": "^2.10.0",
+    "mapbox-gl": "^0.54.0",
+    "ngx-mapbox-gl": "^4.5.0",
     "rxjs": "~6.5.0",
     "zone.js": "^0.10.2"
   },
@@ -68,6 +70,7 @@
     "@nrwl/workspace": "9.1.4",
     "@schematics/angular": "9.0.1",
     "@types/jest": "24.9.1",
+    "@types/mapbox-gl": "^0.51.10",
     "@types/node": "~8.9.4",
     "codelyzer": "~5.0.1",
     "cypress": "^4.1.0",
